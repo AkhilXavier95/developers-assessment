@@ -75,3 +75,7 @@ export function entryTotalEarningsCents(entry: {
   const hours = entry.duration_minutes / 60
   return Math.round(hours * entry.hourly_rate_cents)
 }
+
+export function formatEntryStatusLabel(status: string) {
+  return status.replace(/_/g, " ")
+}

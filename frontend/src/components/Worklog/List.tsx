@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { MoreHorizontal } from "lucide-react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -8,26 +11,21 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { WorklogRow } from "@/lib/worklog/types";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
+import type { ListProps, WorklogRow } from "@/lib/worklog/types";
 import {
+  formatEntryStatusLabel,
   formatLoggedAtUtcTwoLines,
   formatUsdFromCents,
   initials,
 } from "@/lib/worklog/worklogUtils";
 
+import { TimeEntryDetails } from "./TimeEntryDetails";
+
 const gridCols =
   "md:grid-cols-[10.5rem_minmax(10rem,1.25fr)_minmax(0,2.75fr)_5rem_5rem_5rem_2.5rem]";
 
 const entryGridClass = `md:grid ${gridCols} md:items-center md:gap-x-6 md:gap-y-2 md:py-3`;
-
-type ListProps = {
-  pageRows: WorklogRow[];
-  totalRowCount: number;
-  pageSize: number;
-  safePage: number;
-  pageCount: number;
-  onPageChange: (page: number) => void;
-};
 
 export function List({
   pageRows,
@@ -37,6 +35,8 @@ export function List({
   pageCount,
   onPageChange,
 }: ListProps) {
+  const [detailRow, setDetailRow] = useState<WorklogRow | null>(null);
+
   return (
     <div className="relative">
       <div
@@ -87,7 +87,7 @@ export function List({
                     {row.description}
                   </p>
                   <p className="text-muted-foreground mt-0.5 text-xs uppercase">
-                    {row.status.replace(/_/g, " ")} •{" "}
+                    {formatEntryStatusLabel(row.status)} •{" "}
                     {row.billable ? "Billable" : "Non-billable"}
                   </p>
                   <p className="text-muted-foreground mt-1 font-mono text-xs md:hidden">
@@ -117,7 +117,13 @@ export function List({
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem>View worklog</DropdownMenuItem>
+                      <DropdownMenuItem
+                        onSelect={() => {
+                          setDetailRow(row);
+                        }}
+                      >
+                        View worklog
+                      </DropdownMenuItem>
                       <DropdownMenuItem>View user</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -155,6 +161,20 @@ export function List({
           </div>
         </div>
       ) : null}
+
+      <Sheet
+        open={detailRow !== null}
+        onOpenChange={(open) => {
+          if (!open) setDetailRow(null);
+        }}
+      >
+        <SheetContent
+          side="right"
+          className="w-full gap-0 overflow-y-auto border-l p-0 sm:max-w-3xl lg:max-w-4xl"
+        >
+          {detailRow ? <TimeEntryDetails row={detailRow} /> : null}
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }

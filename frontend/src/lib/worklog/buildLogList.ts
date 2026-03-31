@@ -26,6 +26,7 @@ export function buildLogList(data: any): {
       id: entry.id as string,
       logged_at: entry.logged_at as string,
       userDisplayName: (user?.display_name as string) ?? entry.user_id,
+      userEmail: user?.email as string | undefined,
       description: entry.description as string,
       status: entry.status as string,
       billable: Boolean(entry.billable),
@@ -34,6 +35,7 @@ export function buildLogList(data: any): {
       totalCents,
       worklogId: entry.worklog_id as string,
       worklogSubmittedAt: (worklog?.submitted_at as string) ?? "",
+      taskId: entry.task_id as string | undefined,
     }
   })
 
