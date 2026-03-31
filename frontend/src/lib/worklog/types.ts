@@ -1,5 +1,8 @@
+export type WorklogFilterTab = "all" | "date_range"
+
 export type WorklogRow = {
   id: string
+  userId: string
   logged_at: string
   userDisplayName: string
   userEmail?: string
@@ -32,4 +35,13 @@ export type ListProps = {
 
 export type TimeEntryDetailsProps = {
   row: WorklogRow
+}
+
+export type WorklogFiltersProps = {
+  filterTab: WorklogFilterTab
+  onFilterTabChange: (tab: WorklogFilterTab) => void
+  dateFrom: string
+  dateTo: string
+  onDateFromChange: (value: string) => void
+  onDateToChange: (value: string) => void
 }

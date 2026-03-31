@@ -18,6 +18,46 @@ export function formatDateOnlyUtc(iso: string): string {
   }).format(d)
 }
 
+function utcMonthDayFromYmd(ymd: string) {
+  const t = Date.parse(`${ymd}T12:00:00.000Z`)
+  if (Number.isNaN(t)) return ymd
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(t)
+}
+
+function utcYearFromYmd(ymd: string) {
+  const t = Date.parse(`${ymd}T12:00:00.000Z`)
+  if (Number.isNaN(t)) return ""
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(t)
+}
+
+export function formatUtcYmdBillingRangeSummary(
+  fromYmd: string,
+  toYmd: string,
+): string {
+  if (!fromYmd && !toYmd) return "Select date range"
+  if (fromYmd && toYmd) {
+    const y1 = utcYearFromYmd(fromYmd)
+    const y2 = utcYearFromYmd(toYmd)
+    const m1 = utcMonthDayFromYmd(fromYmd)
+    const m2 = utcMonthDayFromYmd(toYmd)
+    if (y1 === y2) {
+      return `${m1} – ${m2}, ${y1}`
+    }
+    return `${m1}, ${y1} – ${m2}, ${y2}`
+  }
+  if (fromYmd) {
+    return `From ${utcMonthDayFromYmd(fromYmd)}, ${utcYearFromYmd(fromYmd)}`
+  }
+  return `Through ${utcMonthDayFromYmd(toYmd)}, ${utcYearFromYmd(toYmd)}`
+}
+
 /**
  * Two-line UTC display, e.g.
  *   Mar 19,
