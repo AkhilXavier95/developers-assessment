@@ -21,7 +21,22 @@ import { WorklogFilters } from "./WorklogFilters";
 export function Content() {
   const { data } = useSuspenseQuery(getWorklogQueryOptions());
 
-  const { rows: allRows } = useMemo(() => buildLogList(data), [data]);
+  const [statusOverrides, setStatusOverrides] = useState<
+    Record<string, string>
+  >({});
+
+  const { rows: allRows } = useMemo(
+    () => buildLogList(data, statusOverrides),
+    [data, statusOverrides],
+  );
+
+  const onApproveTimeEntry = useCallback((entryId: string) => {
+    setStatusOverrides((prev) => ({ ...prev, [entryId]: "approved" }));
+  }, []);
+
+  const onRejectTimeEntry = useCallback((entryId: string) => {
+    setStatusOverrides((prev) => ({ ...prev, [entryId]: "rejected" }));
+  }, []);
 
   const [filterTab, setFilterTab] = useState<WorklogFilterTab>("all");
   const [dateFrom, setDateFrom] = useState("");
@@ -125,6 +140,8 @@ export function Content() {
         onPageChange={setPage}
         onExcludeWorklogFromBatch={onExcludeWorklogFromBatch}
         onExcludeFreelancerFromBatch={onExcludeFreelancerFromBatch}
+        onApproveTimeEntry={onApproveTimeEntry}
+        onRejectTimeEntry={onRejectTimeEntry}
       />
     </div>
   );

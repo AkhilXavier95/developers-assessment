@@ -24,7 +24,10 @@ export function computeWorklogStatsFromRows(rows: WorklogRow[]): WorklogStats {
   }
 }
 
-export function buildLogList(data: any): {
+export function buildLogList(
+  data: any,
+  entryStatusOverrides?: Record<string, string>,
+): {
   rows: WorklogRow[]
   stats: WorklogStats
 } {
@@ -45,14 +48,17 @@ export function buildLogList(data: any): {
     const user = userMap.get(entry.user_id)
     const worklog = wlMap.get(entry.worklog_id)
     const totalCents = entryTotalEarningsCents(entry)
+    const entryId = entry.id as string
+    const status =
+      (entryStatusOverrides?.[entryId] ?? entry.status) as string
     return {
-      id: entry.id as string,
+      id: entryId,
       userId: entry.user_id as string,
       logged_at: entry.logged_at as string,
       userDisplayName: (user?.display_name as string) ?? entry.user_id,
       userEmail: user?.email as string | undefined,
       description: entry.description as string,
-      status: entry.status as string,
+      status,
       billable: Boolean(entry.billable),
       durationMinutes: entry.duration_minutes as number,
       hourlyRateCents: entry.hourly_rate_cents as number,

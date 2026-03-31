@@ -38,6 +38,8 @@ export type ListProps = {
   onPageChange: (page: number) => void
   onExcludeWorklogFromBatch: (worklogId: string) => void
   onExcludeFreelancerFromBatch: (userId: string, displayName: string) => void
+  onApproveTimeEntry: (entryId: string) => void
+  onRejectTimeEntry: (entryId: string) => void
 }
 
 export type PaymentBatchExclusionsBarProps = {
@@ -50,6 +52,8 @@ export type PaymentBatchExclusionsBarProps = {
 
 export type TimeEntryDetailsProps = {
   row: WorklogRow
+  onApproveEntry: (entryId: string) => void
+  onRejectEntry: (entryId: string) => void
 }
 
 export type WorklogFiltersProps = {

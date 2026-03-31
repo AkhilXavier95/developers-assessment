@@ -119,3 +119,17 @@ export function entryTotalEarningsCents(entry: {
 export function formatEntryStatusLabel(status: string) {
   return status.replace(/_/g, " ")
 }
+
+/** Text color classes for time entry status in tables and detail views. */
+export function entryStatusTextClass(status: string): string {
+  if (status === "approved") {
+    return "font-medium text-emerald-700 dark:text-emerald-400"
+  }
+  if (status === "rejected") {
+    return "font-medium text-destructive"
+  }
+  if (status === "pending_review") {
+    return "font-medium text-amber-700 dark:text-amber-400"
+  }
+  return "font-medium text-muted-foreground"
+}

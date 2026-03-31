@@ -14,11 +14,13 @@ import {
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import type { ListProps, WorklogRow } from "@/lib/worklog/types";
 import {
+  entryStatusTextClass,
   formatEntryStatusLabel,
   formatLoggedAtUtcTwoLines,
   formatUsdFromCents,
   initials,
 } from "@/lib/worklog/worklogUtils";
+import { cn } from "@/lib/utils";
 
 import { TimeEntryDetails } from "./TimeEntryDetails";
 
@@ -36,6 +38,8 @@ export function List({
   onPageChange,
   onExcludeWorklogFromBatch,
   onExcludeFreelancerFromBatch,
+  onApproveTimeEntry,
+  onRejectTimeEntry,
 }: ListProps) {
   const [detailRow, setDetailRow] = useState<WorklogRow | null>(null);
 
@@ -88,9 +92,19 @@ export function List({
                   <p className="text-sm font-semibold leading-snug">
                     {row.description}
                   </p>
-                  <p className="text-muted-foreground mt-0.5 text-xs uppercase">
-                    {formatEntryStatusLabel(row.status)} •{" "}
-                    {row.billable ? "Billable" : "Non-billable"}
+                  <p className="mt-0.5 text-xs">
+                    <span
+                      className={cn(
+                        "uppercase",
+                        entryStatusTextClass(row.status),
+                      )}
+                    >
+                      {formatEntryStatusLabel(row.status)}
+                    </span>
+                    <span className="text-muted-foreground"> • </span>
+                    <span className="text-muted-foreground uppercase">
+                      {row.billable ? "Billable" : "Non-billable"}
+                    </span>
                   </p>
                   <p className="text-muted-foreground mt-1 font-mono text-xs md:hidden">
                     Worklog {row.worklogId}
@@ -190,7 +204,23 @@ export function List({
           side="right"
           className="w-full gap-0 overflow-y-auto border-l p-0 sm:max-w-3xl lg:max-w-4xl"
         >
-          {detailRow ? <TimeEntryDetails row={detailRow} /> : null}
+          {detailRow ? (
+            <TimeEntryDetails
+              row={detailRow}
+              onApproveEntry={(entryId) => {
+                onApproveTimeEntry(entryId);
+                setDetailRow((prev) =>
+                  prev?.id === entryId ? { ...prev, status: "approved" } : prev,
+                );
+              }}
+              onRejectEntry={(entryId) => {
+                onRejectTimeEntry(entryId);
+                setDetailRow((prev) =>
+                  prev?.id === entryId ? { ...prev, status: "rejected" } : prev,
+                );
+              }}
+            />
+          ) : null}
         </SheetContent>
       </Sheet>
     </div>

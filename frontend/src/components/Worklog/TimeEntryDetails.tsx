@@ -1,22 +1,26 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SheetDescription, SheetTitle } from "@/components/ui/sheet";
 import type { TimeEntryDetailsProps } from "@/lib/worklog/types";
 import {
+  entryStatusTextClass,
   formatDateOnlyUtc,
   formatEntryStatusLabel,
   formatUsdFromCents,
 } from "@/lib/worklog/worklogUtils";
+import { cn } from "@/lib/utils";
 
 import { MetricCard, metricLabelClass } from "./MetricCard";
 
-export function TimeEntryDetails({ row }: TimeEntryDetailsProps) {
+export function TimeEntryDetails({
+  row,
+  onApproveEntry,
+  onRejectEntry,
+}: TimeEntryDetailsProps) {
   const hours = (row.durationMinutes / 60).toFixed(1);
   const dateLabel = formatDateOnlyUtc(row.logged_at);
   const pendingReview = row.status === "pending_review";
-
   return (
     <div className="flex flex-col gap-8 px-6 pb-8 pt-6">
       <div className="mt-6 flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
@@ -31,23 +35,39 @@ export function TimeEntryDetails({ row }: TimeEntryDetailsProps) {
                 aria-hidden
               />
             ) : null}
-            <Badge
-              variant={pendingReview ? "secondary" : "outline"}
-              className="capitalize"
+            <span
+              className={cn(
+                "text-sm uppercase",
+                entryStatusTextClass(row.status),
+              )}
             >
               {formatEntryStatusLabel(row.status)}
-            </Badge>
+            </span>
           </div>
           {pendingReview ? (
-            <Button
-              type="button"
-              size="sm"
-              className="w-full sm:w-auto"
-              disabled
-              title="Approval is not wired yet"
-            >
-              Approve entry
-            </Button>
+            <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
+              <Button
+                type="button"
+                size="sm"
+                className="w-full sm:w-auto"
+                onClick={() => {
+                  onApproveEntry(row.id);
+                }}
+              >
+                Approve entry
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="text-destructive hover:text-destructive w-full border-destructive/50 sm:w-auto"
+                onClick={() => {
+                  onRejectEntry(row.id);
+                }}
+              >
+                Reject entry
+              </Button>
+            </div>
           ) : null}
         </div>
       </div>
