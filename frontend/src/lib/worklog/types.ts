@@ -24,6 +24,11 @@ export type WorklogStats = {
   pendingReview: number
 }
 
+export type ExcludedFreelancerRef = {
+  userId: string
+  displayName: string
+}
+
 export type ListProps = {
   pageRows: WorklogRow[]
   totalRowCount: number
@@ -31,6 +36,16 @@ export type ListProps = {
   safePage: number
   pageCount: number
   onPageChange: (page: number) => void
+  onExcludeWorklogFromBatch: (worklogId: string) => void
+  onExcludeFreelancerFromBatch: (userId: string, displayName: string) => void
+}
+
+export type PaymentBatchExclusionsBarProps = {
+  excludedWorklogIds: string[]
+  excludedFreelancers: ExcludedFreelancerRef[]
+  onRemoveWorklog: (worklogId: string) => void
+  onRemoveFreelancer: (userId: string) => void
+  onClearAll: () => void
 }
 
 export type TimeEntryDetailsProps = {

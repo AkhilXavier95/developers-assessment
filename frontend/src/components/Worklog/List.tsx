@@ -34,6 +34,8 @@ export function List({
   safePage,
   pageCount,
   onPageChange,
+  onExcludeWorklogFromBatch,
+  onExcludeFreelancerFromBatch,
 }: ListProps) {
   const [detailRow, setDetailRow] = useState<WorklogRow | null>(null);
 
@@ -124,7 +126,23 @@ export function List({
                       >
                         View worklog
                       </DropdownMenuItem>
-                      <DropdownMenuItem>View user</DropdownMenuItem>
+                      <DropdownMenuItem
+                        onSelect={() => {
+                          onExcludeWorklogFromBatch(row.worklogId);
+                        }}
+                      >
+                        Exclude worklog from batch
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onSelect={() => {
+                          onExcludeFreelancerFromBatch(
+                            row.userId,
+                            row.userDisplayName,
+                          );
+                        }}
+                      >
+                        Exclude freelancer from batch
+                      </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
