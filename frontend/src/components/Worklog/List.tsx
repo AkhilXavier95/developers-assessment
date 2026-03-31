@@ -1,0 +1,160 @@
+import { MoreHorizontal } from "lucide-react";
+
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import type { WorklogRow } from "@/lib/worklog/types";
+import {
+  formatLoggedAtUtcTwoLines,
+  formatUsdFromCents,
+  initials,
+} from "@/lib/worklog/worklogUtils";
+
+const gridCols =
+  "md:grid-cols-[10.5rem_minmax(10rem,1.25fr)_minmax(0,2.75fr)_5rem_5rem_5rem_2.5rem]";
+
+const entryGridClass = `md:grid ${gridCols} md:items-center md:gap-x-6 md:gap-y-2 md:py-3`;
+
+type ListProps = {
+  pageRows: WorklogRow[];
+  totalRowCount: number;
+  pageSize: number;
+  safePage: number;
+  pageCount: number;
+  onPageChange: (page: number) => void;
+};
+
+export function List({
+  pageRows,
+  totalRowCount,
+  pageSize,
+  safePage,
+  pageCount,
+  onPageChange,
+}: ListProps) {
+  return (
+    <div className="relative">
+      <div
+        className={`text-muted-foreground mb-3 hidden rounded-xl border border-transparent p-3 text-xs font-medium uppercase md:grid ${gridCols} md:items-center md:gap-x-6 md:gap-y-2 md:py-2`}
+      >
+        <span>Date</span>
+        <span>User</span>
+        <span>Task</span>
+        <span className="text-right">Duration</span>
+        <span className="text-right">Rate</span>
+        <span className="text-right">Total</span>
+        <span className="text-right">Action</span>
+      </div>
+
+      <ul className="flex flex-col gap-2">
+        {pageRows.map((row) => {
+          const { line1, line2 } = formatLoggedAtUtcTwoLines(row.logged_at);
+          return (
+            <li
+              key={row.id}
+              className={`bg-card border rounded-xl p-3 shadow-sm transition-colors ${entryGridClass}`}
+            >
+              <div className="flex flex-col gap-3 md:contents">
+                <div className="min-w-0 md:min-w-[10.5rem] md:shrink-0 md:text-sm">
+                  <p
+                    className="text-muted-foreground text-sm leading-tight"
+                    title={row.logged_at}
+                  >
+                    <span className="block whitespace-nowrap">{line1}</span>
+                    <span className="block whitespace-nowrap">{line2}</span>
+                  </p>
+                  <p className="text-muted-foreground mt-1 text-xs md:hidden">
+                    {row.worklogId}
+                  </p>
+                </div>
+                <div className="flex min-w-0 items-center gap-2 md:min-w-0 md:overflow-hidden">
+                  <Avatar className="size-8">
+                    <AvatarFallback className="text-xs">
+                      {initials(row.userDisplayName)}
+                    </AvatarFallback>
+                  </Avatar>
+                  <span className="truncate text-sm font-medium">
+                    {row.userDisplayName}
+                  </span>
+                </div>
+                <div className="min-w-0 md:col-span-1">
+                  <p className="text-sm font-semibold leading-snug">
+                    {row.description}
+                  </p>
+                  <p className="text-muted-foreground mt-0.5 text-xs uppercase">
+                    {row.status.replace(/_/g, " ")} •{" "}
+                    {row.billable ? "Billable" : "Non-billable"}
+                  </p>
+                  <p className="text-muted-foreground mt-1 font-mono text-xs md:hidden">
+                    Worklog {row.worklogId}
+                  </p>
+                </div>
+                <p className="text-sm tabular-nums md:text-right">
+                  {(row.durationMinutes / 60).toFixed(1)}{" "}
+                  <span className="text-muted-foreground">hrs</span>
+                </p>
+                <p className="text-sm tabular-nums md:text-right">
+                  {formatUsdFromCents(row.hourlyRateCents)}/h
+                </p>
+                <p className="text-primary text-sm font-semibold tabular-nums md:text-right">
+                  {formatUsdFromCents(row.totalCents)}
+                </p>
+                <div className="flex justify-end">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon-sm"
+                        aria-label={`Actions for ${row.description}`}
+                      >
+                        <MoreHorizontal className="size-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem>View worklog</DropdownMenuItem>
+                      <DropdownMenuItem>View user</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+
+      {totalRowCount > pageSize ? (
+        <div className="mt-4 flex items-center justify-between gap-4">
+          <p className="text-muted-foreground text-sm">
+            Page {safePage} of {pageCount}
+          </p>
+          <div className="flex gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              disabled={safePage <= 1}
+              onClick={() => onPageChange(Math.max(1, safePage - 1))}
+            >
+              Previous
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              disabled={safePage >= pageCount}
+              onClick={() => onPageChange(Math.min(pageCount, safePage + 1))}
+            >
+              Next
+            </Button>
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+}
