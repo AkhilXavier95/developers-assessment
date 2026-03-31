@@ -3,7 +3,7 @@
     {
       "id": "time_entry_1",
       "worklog_id": "worklog_1",
-      "user_id": "user_1",
+      "user_id": "fl_01",
       "task_id": "task_1",
       "duration_minutes": 180,
       "description": "Checkout API integration and error handling",
@@ -15,7 +15,7 @@
     {
       "id": "time_entry_2",
       "worklog_id": "worklog_1",
-      "user_id": "user_1",
+      "user_id": "fl_01",
       "task_id": "task_1",
       "duration_minutes": 90,
       "description": "Code review follow-ups for payment webhook",
@@ -27,7 +27,7 @@
     {
       "id": "time_entry_3",
       "worklog_id": "worklog_2",
-      "user_id": "user_2",
+      "user_id": "fl_02",
       "task_id": "task_2",
       "duration_minutes": 240,
       "description": "Dashboard charts — spike and first implementation",
@@ -39,7 +39,7 @@
     {
       "id": "time_entry_4",
       "worklog_id": "worklog_2",
-      "user_id": "user_2",
+      "user_id": "fl_02",
       "task_id": "task_2",
       "duration_minutes": 60,
       "description": "Internal team sync (non-billable)",
@@ -51,7 +51,7 @@
     {
       "id": "time_entry_5",
       "worklog_id": "worklog_3",
-      "user_id": "user_3",
+      "user_id": "fl_03",
       "task_id": "task_3",
       "duration_minutes": 120,
       "description": "Accessibility audit fixes for onboarding",
@@ -63,7 +63,7 @@
     {
       "id": "time_entry_6",
       "worklog_id": "worklog_3",
-      "user_id": "user_3",
+      "user_id": "fl_03",
       "task_id": "task_3",
       "duration_minutes": 45,
       "description": "Documentation for screen reader flows",
@@ -75,7 +75,7 @@
     {
       "id": "time_entry_7",
       "worklog_id": "worklog_4",
-      "user_id": "user_1",
+      "user_id": "fl_01",
       "task_id": "task_4",
       "duration_minutes": 30,
       "description": "Hotfix: null guard on invoice totals",
@@ -87,7 +87,7 @@
     {
       "id": "time_entry_8",
       "worklog_id": "worklog_5",
-      "user_id": "user_2",
+      "user_id": "fl_02",
       "task_id": "task_2",
       "duration_minutes": 150,
       "description": "Responsive layout fixes for mobile dashboard",
@@ -99,7 +99,7 @@
     {
       "id": "time_entry_9",
       "worklog_id": "worklog_6",
-      "user_id": "user_4",
+      "user_id": "fl_04",
       "task_id": "task_5",
       "duration_minutes": 360,
       "description": "Legacy migration script and data validation",
