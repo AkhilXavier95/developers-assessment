@@ -2,7 +2,7 @@
   "data": [
     {
       "id": "worklog_1",
-      "user_id": "user_1",
+      "user_id": "fl_01",
       "payment_cycle_id": "cycle_march_2026",
       "status": "pending_review",
       "time_entry_ids": ["time_entry_1", "time_entry_2"],
@@ -11,7 +11,7 @@
     },
     {
       "id": "worklog_2",
-      "user_id": "user_2",
+      "user_id": "fl_02",
       "payment_cycle_id": "cycle_march_2026",
       "status": "pending_review",
       "time_entry_ids": ["time_entry_3", "time_entry_4"],
@@ -20,7 +20,7 @@
     },
     {
       "id": "worklog_3",
-      "user_id": "user_3",
+      "user_id": "fl_03",
       "payment_cycle_id": "cycle_march_2026",
       "status": "pending_review",
       "time_entry_ids": ["time_entry_5", "time_entry_6"],
@@ -29,7 +29,7 @@
     },
     {
       "id": "worklog_4",
-      "user_id": "user_1",
+      "user_id": "fl_01",
       "payment_cycle_id": "cycle_march_2026",
       "status": "pending_review",
       "time_entry_ids": ["time_entry_7"],
@@ -38,7 +38,7 @@
     },
     {
       "id": "worklog_5",
-      "user_id": "user_2",
+      "user_id": "fl_02",
       "payment_cycle_id": "cycle_march_2026",
       "status": "pending_review",
       "time_entry_ids": ["time_entry_8"],
@@ -47,7 +47,7 @@
     },
     {
       "id": "worklog_6",
-      "user_id": "user_4",
+      "user_id": "fl_04",
       "payment_cycle_id": "cycle_march_2026",
       "status": "pending_review",
       "time_entry_ids": ["time_entry_9"],

@@ -3,7 +3,7 @@
     {
       "id": "payment_summary_1",
       "payment_cycle_id": "cycle_march_2026",
-      "user_id": "user_1",
+      "user_id": "fl_01",
       "currency": "USD",
       "billable_minutes_submitted": 300,
       "amount_submitted_cents": 62500,
@@ -17,7 +17,7 @@
     {
       "id": "payment_summary_2",
       "payment_cycle_id": "cycle_march_2026",
-      "user_id": "user_2",
+      "user_id": "fl_02",
       "currency": "USD",
       "billable_minutes_submitted": 390,
       "amount_submitted_cents": 61750,
@@ -31,7 +31,7 @@
     {
       "id": "payment_summary_3",
       "payment_cycle_id": "cycle_march_2026",
-      "user_id": "user_3",
+      "user_id": "fl_03",
       "currency": "USD",
       "billable_minutes_submitted": 165,
       "amount_submitted_cents": 41250,
@@ -45,7 +45,7 @@
     {
       "id": "payment_summary_4",
       "payment_cycle_id": "cycle_march_2026",
-      "user_id": "user_4",
+      "user_id": "fl_04",
       "currency": "USD",
       "billable_minutes_submitted": 360,
       "amount_submitted_cents": 48000,
