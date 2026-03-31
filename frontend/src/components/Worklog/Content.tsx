@@ -17,6 +17,7 @@ import { List } from "./List";
 import { PaymentBatchExclusions } from "./PaymentBatchExclusions";
 import { StatsCards } from "./StatsCards";
 import { WorklogFilters } from "./WorklogFilters";
+import { WorklogReviewPayDialog } from "./WorklogReviewPayDialog";
 
 export function Content() {
   const { data } = useSuspenseQuery(getWorklogQueryOptions());
@@ -69,6 +70,13 @@ export function Content() {
 
   const stats = useMemo(() => computeWorklogStatsFromRows(rows), [rows]);
 
+  const approvedPayRows = useMemo(
+    () => rows.filter((r) => r.status === "approved"),
+    [rows],
+  );
+
+  const [reviewPayOpen, setReviewPayOpen] = useState(false);
+
   const onExcludeWorklogFromBatch = useCallback((worklogId: string) => {
     setExcludedWorklogIds((prev) =>
       prev.includes(worklogId)
@@ -105,7 +113,17 @@ export function Content() {
 
   return (
     <div className="flex flex-col gap-6">
-      <Header />
+      <Header
+        reviewPayApprovedCount={approvedPayRows.length}
+        onReviewPayClick={() => {
+          setReviewPayOpen(true);
+        }}
+      />
+      <WorklogReviewPayDialog
+        open={reviewPayOpen}
+        onOpenChange={setReviewPayOpen}
+        entries={approvedPayRows}
+      />
       <WorklogFilters
         filterTab={filterTab}
         onFilterTabChange={setFilterTab}

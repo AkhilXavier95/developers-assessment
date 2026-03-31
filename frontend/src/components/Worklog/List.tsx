@@ -138,7 +138,7 @@ export function List({
                           setDetailRow(row);
                         }}
                       >
-                        View worklog
+                        View Time Entry
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onSelect={() => {

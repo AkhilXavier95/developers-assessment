@@ -64,3 +64,14 @@ export type WorklogFiltersProps = {
   onDateFromChange: (value: string) => void
   onDateToChange: (value: string) => void
 }
+
+export type WorklogHeaderProps = {
+  reviewPayApprovedCount: number
+  onReviewPayClick: () => void
+}
+
+export type WorklogReviewPayDialogProps = {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  entries: WorklogRow[]
+}
