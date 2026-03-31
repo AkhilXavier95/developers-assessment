@@ -1,0 +1,113 @@
+{
+  "data": [
+    {
+      "id": "time_entry_1",
+      "worklog_id": "worklog_1",
+      "user_id": "user_1",
+      "task_id": "task_1",
+      "duration_minutes": 180,
+      "description": "Checkout API integration and error handling",
+      "billable": true,
+      "hourly_rate_cents": 12500,
+      "status": "pending_review",
+      "logged_at": "2026-03-10T22:15:00.000Z"
+    },
+    {
+      "id": "time_entry_2",
+      "worklog_id": "worklog_1",
+      "user_id": "user_1",
+      "task_id": "task_1",
+      "duration_minutes": 90,
+      "description": "Code review follow-ups for payment webhook",
+      "billable": true,
+      "hourly_rate_cents": 12500,
+      "status": "pending_review",
+      "logged_at": "2026-03-12T19:30:00.000Z"
+    },
+    {
+      "id": "time_entry_3",
+      "worklog_id": "worklog_2",
+      "user_id": "user_2",
+      "task_id": "task_2",
+      "duration_minutes": 240,
+      "description": "Dashboard charts — spike and first implementation",
+      "billable": true,
+      "hourly_rate_cents": 9500,
+      "status": "approved",
+      "logged_at": "2026-03-11T17:45:00.000Z"
+    },
+    {
+      "id": "time_entry_4",
+      "worklog_id": "worklog_2",
+      "user_id": "user_2",
+      "task_id": "task_2",
+      "duration_minutes": 60,
+      "description": "Internal team sync (non-billable)",
+      "billable": false,
+      "hourly_rate_cents": 9500,
+      "status": "approved",
+      "logged_at": "2026-03-11T21:00:00.000Z"
+    },
+    {
+      "id": "time_entry_5",
+      "worklog_id": "worklog_3",
+      "user_id": "user_3",
+      "task_id": "task_3",
+      "duration_minutes": 120,
+      "description": "Accessibility audit fixes for onboarding",
+      "billable": true,
+      "hourly_rate_cents": 15000,
+      "status": "pending_review",
+      "logged_at": "2026-03-14T15:20:00.000Z"
+    },
+    {
+      "id": "time_entry_6",
+      "worklog_id": "worklog_3",
+      "user_id": "user_3",
+      "task_id": "task_3",
+      "duration_minutes": 45,
+      "description": "Documentation for screen reader flows",
+      "billable": true,
+      "hourly_rate_cents": 15000,
+      "status": "rejected",
+      "logged_at": "2026-03-14T16:05:00.000Z"
+    },
+    {
+      "id": "time_entry_7",
+      "worklog_id": "worklog_4",
+      "user_id": "user_1",
+      "task_id": "task_4",
+      "duration_minutes": 30,
+      "description": "Hotfix: null guard on invoice totals",
+      "billable": true,
+      "hourly_rate_cents": 12500,
+      "status": "pending_review",
+      "logged_at": "2026-03-18T09:10:00.000Z"
+    },
+    {
+      "id": "time_entry_8",
+      "worklog_id": "worklog_5",
+      "user_id": "user_2",
+      "task_id": "task_2",
+      "duration_minutes": 150,
+      "description": "Responsive layout fixes for mobile dashboard",
+      "billable": true,
+      "hourly_rate_cents": 9500,
+      "status": "pending_review",
+      "logged_at": "2026-03-19T14:00:00.000Z"
+    },
+    {
+      "id": "time_entry_9",
+      "worklog_id": "worklog_6",
+      "user_id": "user_4",
+      "task_id": "task_5",
+      "duration_minutes": 360,
+      "description": "Legacy migration script and data validation",
+      "billable": true,
+      "hourly_rate_cents": 8000,
+      "status": "pending_review",
+      "logged_at": "2026-02-28T23:59:00.000Z"
+    }
+  ],
+  "total_count": 9
+}
