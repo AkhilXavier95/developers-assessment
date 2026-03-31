@@ -1,0 +1,61 @@
+{
+  "data": [
+    {
+      "id": "payment_summary_1",
+      "payment_cycle_id": "cycle_march_2026",
+      "user_id": "user_1",
+      "currency": "USD",
+      "billable_minutes_submitted": 300,
+      "amount_submitted_cents": 62500,
+      "amount_approved_cents": null,
+      "amount_rejected_cents": null,
+      "amount_paid_cents": null,
+      "status": "pending_review",
+      "worklog_ids": ["worklog_1", "worklog_4"],
+      "updated_at": "2026-03-18T09:15:00.000Z"
+    },
+    {
+      "id": "payment_summary_2",
+      "payment_cycle_id": "cycle_march_2026",
+      "user_id": "user_2",
+      "currency": "USD",
+      "billable_minutes_submitted": 390,
+      "amount_submitted_cents": 61750,
+      "amount_approved_cents": 38000,
+      "amount_rejected_cents": null,
+      "amount_paid_cents": null,
+      "status": "partial_approval",
+      "worklog_ids": ["worklog_2", "worklog_5"],
+      "updated_at": "2026-03-19T14:05:00.000Z"
+    },
+    {
+      "id": "payment_summary_3",
+      "payment_cycle_id": "cycle_march_2026",
+      "user_id": "user_3",
+      "currency": "USD",
+      "billable_minutes_submitted": 165,
+      "amount_submitted_cents": 41250,
+      "amount_approved_cents": null,
+      "amount_rejected_cents": 11250,
+      "amount_paid_cents": null,
+      "status": "pending_review",
+      "worklog_ids": ["worklog_3"],
+      "updated_at": "2026-03-14T16:10:00.000Z"
+    },
+    {
+      "id": "payment_summary_4",
+      "payment_cycle_id": "cycle_march_2026",
+      "user_id": "user_4",
+      "currency": "USD",
+      "billable_minutes_submitted": 360,
+      "amount_submitted_cents": 48000,
+      "amount_approved_cents": null,
+      "amount_rejected_cents": null,
+      "amount_paid_cents": null,
+      "status": "pending_review",
+      "worklog_ids": ["worklog_6"],
+      "updated_at": "2026-03-01T00:05:00.000Z"
+    }
+  ],
+  "total_count": 4
+}
